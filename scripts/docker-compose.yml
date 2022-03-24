@@ -1,0 +1,17 @@
+version: '3.1'
+services:
+  thegame:
+    image: 'gcr.io/balmy-script-278222/thegame:1.11'
+    env_file:
+      - 'thegame.env'
+    ports:
+      - '9000:9000'
+  frontend:
+    depends_on:
+      - 'thegame'
+    image: 'gcr.io/balmy-script-278222/thegame-nginx:1.11'
+    ports:
+      - '443:443'
+      - '80:80'
+    volumes:
+      - '/etc/letsencrypt:/etc/letsencrypt'
