@@ -6,13 +6,20 @@ services:
       - 'thegame.env'
     ports:
       - '9000:9000'
+  goraid:
+    image: 'gcr.io/balmy-script-278222/goraid:1.11'
+    env_file:
+      - 'goraid.env'
+    ports:
+      - '9000:9000'
   frontend:
     depends_on:
       - 'thegame'
-    image: 'gcr.io/balmy-script-278222/thegame-nginx:1.11'
+      - 'goraid'
+    image: 'gcr.io/balmy-script-278222/thegame-nginx:1.16'
     ports:
       - '443:443'
       - '80:80'
     volumes:
       - '/etc/letsencrypt:/etc/letsencrypt'
-      - '/home/theilig/react/thegame:/usr/share/nginx/html/thegame'
+      - '/home/theilig/react/thegame:/usr/share/nginx/html/thegame:/usr/share/nginx/html/goraid'
