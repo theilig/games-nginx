@@ -1,5 +1,5 @@
 use strict;
-system('git fetch --all --tags');
+system('git fetch --all --tags >/dev/null');
 open(INPUT, "git describe --tags|") or die "can't find compose file";
 my @lines = <INPUT>;
 close INPUT;
@@ -15,3 +15,4 @@ if (!$version) {
     die "couldn't find version";
 }
 system("git tag -a v$version -m 'version $version'");
+print $version
