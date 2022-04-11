@@ -16,10 +16,11 @@ services:
     depends_on:
       - 'thegame'
       - 'goraid'
-    image: 'gcr.io/balmy-script-278222/thegame-nginx:1.16'
+    image: 'gcr.io/balmy-script-278222/thegame-nginx:1.17'
     ports:
       - '443:443'
       - '80:80'
     volumes:
       - '/etc/letsencrypt:/etc/letsencrypt'
-      - '/home/theilig/react/thegame:/usr/share/nginx/html/thegame:/usr/share/nginx/html/goraid'
+      - '/home/theilig/react/thegame:/usr/share/nginx/html/thegame'
+      - '/home/theilig/react/goraid:/usr/share/nginx/html/goraid'
